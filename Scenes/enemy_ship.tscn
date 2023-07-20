@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://bmxx27eml0k8p"]
+
+[ext_resource type="Texture2D" uid="uid://d273v4x4s7sfe" path="res://Sprites/EnemyShip/EnemyShip.png" id="1_6f1j4"]
+[ext_resource type="Script" path="res://Scripts/enemy_ship.gd" id="1_ekckf"]
+[ext_resource type="Texture2D" uid="uid://tfit5ddahxmj" path="res://Sprites/EnemyShip/Exhaust/exhaust1.png" id="2_nmr82"]
+[ext_resource type="Texture2D" uid="uid://lw3hm3tadn6q" path="res://Sprites/EnemyShip/Exhaust/exhaust2.png" id="3_3d30x"]
+[ext_resource type="Texture2D" uid="uid://cekf4eaoh7my6" path="res://Sprites/EnemyShip/Exhaust/exhaust3.png" id="4_7n5em"]
+[ext_resource type="Texture2D" uid="uid://c5yoecfdu3tn" path="res://Sprites/EnemyShip/Exhaust/exhaust4.png" id="5_ebxtu"]
+[ext_resource type="AudioStream" uid="uid://bofdx4p6qsrg4" path="res://Sounds/spacecrafthit.wav" id="7_gw03m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w6pb3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_nmr82")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3d30x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7n5em")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ebxtu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_er3t6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xinur"]
+radius = 73.0
+height = 294.0
+
+[node name="EnemyShip" type="CharacterBody2D"]
+position = Vector2(4, 0)
+script = ExtResource("1_ekckf")
+
+[node name="EnemyShip" type="Sprite2D" parent="."]
+position = Vector2(-1, 0)
+scale = Vector2(2.38843, 2.38843)
+texture = ExtResource("1_6f1j4")
+
+[node name="Exhaust" type="AnimatedSprite2D" parent="EnemyShip"]
+z_index = -1
+position = Vector2(-70.5386, -0.33913)
+scale = Vector2(1.67635, 1.67635)
+sprite_frames = SubResource("SpriteFrames_w6pb3")
+frame_progress = 0.976216
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -1.5)
+shape = SubResource("CircleShape2D_er3t6")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(181, 0)
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_xinur")
+
+[node name="Damage" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_gw03m")
+volume_db = -10.0
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

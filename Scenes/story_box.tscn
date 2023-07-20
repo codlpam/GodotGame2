@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://chf55nvmtplw1"]
+
+[ext_resource type="Theme" uid="uid://dj2vxmvc7a34e" path="res://theme/ui.theme" id="1_02tt6"]
+[ext_resource type="Script" path="res://Scripts/StoryBoxIntro.gd" id="2_rf5u1"]
+[ext_resource type="Script" path="res://Scripts/SkipToScene.gd" id="3_o2oct"]
+[ext_resource type="Script" path="res://Scripts/ChatBox.gd" id="4_0tgei"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4dmku"]
+bg_color = Color(0.054902, 0.054902, 0.054902, 0.545098)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="StoryBox" type="Panel"]
+offset_right = 454.0
+offset_bottom = 214.0
+theme = ExtResource("1_02tt6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_4dmku")
+script = ExtResource("2_rf5u1")
+
+[node name="SkipToScene" type="Button" parent="."]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 154.0
+offset_right = 300.0
+offset_bottom = 192.0
+text = "Skip To Scene"
+script = ExtResource("3_o2oct")
+
+[node name="SkipLines" type="Button" parent="."]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 154.0
+offset_right = 150.0
+offset_bottom = 192.0
+text = "Continue..."
+
+[node name="ChatBox" type="Label" parent="."]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 29.0
+offset_right = 377.0
+offset_bottom = 132.0
+theme_override_font_sizes/font_size = 20
+autowrap_mode = 2
+script = ExtResource("4_0tgei")
+
+[connection signal="pressed" from="SkipLines" to="ChatBox" method="_on_skip_lines_pressed"]

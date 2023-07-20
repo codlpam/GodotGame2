@@ -1,0 +1,101 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4qtmgt1crrf8"]
+
+[ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="1_aspeq"]
+[ext_resource type="FontFile" uid="uid://cokywuyj4ehib" path="res://Fonts/Montserrat-Medium.otf" id="2_4gnfy"]
+[ext_resource type="Theme" uid="uid://dj2vxmvc7a34e" path="res://theme/ui.theme" id="3_hfsck"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aspeq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -284.5
+offset_top = -153.0
+offset_right = 284.5
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_4gnfy")
+theme_override_font_sizes/font_size = 80
+text = "Game Paused"
+
+[node name="Resume" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -40.0
+offset_right = 115.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_hfsck")
+theme_override_fonts/font = ExtResource("2_4gnfy")
+theme_override_font_sizes/font_size = 30
+text = "Resume Game"
+
+[node name="MainMenu" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = 32.0
+offset_right = 114.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_hfsck")
+theme_override_fonts/font = ExtResource("2_4gnfy")
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
+
+[node name="QuitGame" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = 104.0
+offset_right = 114.0
+offset_bottom = 164.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_hfsck")
+theme_override_fonts/font = ExtResource("2_4gnfy")
+theme_override_font_sizes/font_size = 30
+text = "Quit Game"
+
+[connection signal="pressed" from="Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="QuitGame" to="." method="_on_quit_game_pressed"]

@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://3qkcrho8sa5r"]
+
+[ext_resource type="Texture2D" uid="uid://b7glfyygbann7" path="res://Images/Space/Nebula Aqua-Pink.png" id="1_akdg6"]
+[ext_resource type="PackedScene" uid="uid://bonjgn4a3uyg5" path="res://Scenes/boss_hud.tscn" id="1_nux7w"]
+[ext_resource type="Texture2D" uid="uid://ny2q8kaige2d" path="res://Images/Space/Stars Small_1.png" id="2_r7cld"]
+[ext_resource type="PackedScene" uid="uid://bkifrxw287tex" path="res://Scenes/player_ship.tscn" id="3_16icv"]
+[ext_resource type="PackedScene" uid="uid://bmxx27eml0k8p" path="res://Scenes/enemy_ship.tscn" id="5_teth5"]
+[ext_resource type="AudioStream" uid="uid://uivqecuo8r6v" path="res://Sounds/space-120280.mp3" id="6_gywto"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p3ec1"]
+size = Vector2(29, 1313.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rkjfn"]
+size = Vector2(2458.5, 31.75)
+
+[node name="Node" type="Node"]
+
+[node name="BossHUD" parent="." instance=ExtResource("1_nux7w")]
+
+[node name="Space" type="Sprite2D" parent="."]
+z_index = -5
+position = Vector2(-847, -153)
+scale = Vector2(1.08057, 1.08057)
+texture = ExtResource("1_akdg6")
+
+[node name="Stars" type="Sprite2D" parent="."]
+z_index = -4
+position = Vector2(-464.5, -464.5)
+scale = Vector2(1.22681, 1.22681)
+texture = ExtResource("2_r7cld")
+
+[node name="PlayerShip" parent="." instance=ExtResource("3_16icv")]
+position = Vector2(842, -3)
+scale = Vector2(0.36084, 0.36084)
+
+[node name="Barries" type="Node2D" parent="."]
+
+[node name="WallLeft" type="StaticBody2D" parent="Barries"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barries/WallLeft"]
+position = Vector2(-1165, 0)
+shape = SubResource("RectangleShape2D_p3ec1")
+
+[node name="WallRight" type="StaticBody2D" parent="Barries"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Barries/WallRight"]
+position = Vector2(1166.5, -1.625)
+shape = SubResource("RectangleShape2D_p3ec1")
+
+[node name="Roof" type="StaticBody2D" parent="Barries"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barries/Roof"]
+position = Vector2(54, -661)
+shape = SubResource("RectangleShape2D_rkjfn")
+
+[node name="Floor" type="StaticBody2D" parent="Barries"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Barries/Floor"]
+position = Vector2(0, 662)
+shape = SubResource("RectangleShape2D_rkjfn")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+
+[node name="EnemyShip" parent="." instance=ExtResource("5_teth5")]
+position = Vector2(-580, -2)
+
+[node name="backgroundMuisc" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_gywto")
+volume_db = -10.0
+autoplay = true

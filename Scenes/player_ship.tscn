@@ -1,0 +1,159 @@
+[gd_scene load_steps=21 format=3 uid="uid://bkifrxw287tex"]
+
+[ext_resource type="Texture2D" uid="uid://cthpea0nmygnb" path="res://Sprites/PlayerShip/Shipbase/Main Ship - Base - Full health.png" id="1_5pkin"]
+[ext_resource type="Script" path="res://Scripts/player_ship.gd" id="1_pv7xp"]
+[ext_resource type="Texture2D" uid="uid://djkso2lc85n4l" path="res://Sprites/PlayerShip/ShipBooster.png" id="2_qk8fq"]
+[ext_resource type="Texture2D" uid="uid://d1kjk5vfouhcf" path="res://Sprites/PlayerShip/ShipEngine.png" id="3_p5841"]
+[ext_resource type="Texture2D" uid="uid://oq1agbybwktt" path="res://Sprites/PlayerShip/ShipWeapons.png" id="4_apx8n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqube"]
+atlas = ExtResource("2_qk8fq")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ii0g6"]
+atlas = ExtResource("2_qk8fq")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aww6x"]
+atlas = ExtResource("2_qk8fq")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfhvi"]
+atlas = ExtResource("2_qk8fq")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pq400"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqube")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ii0g6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aww6x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfhvi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vpev"]
+atlas = ExtResource("4_apx8n")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbbnk"]
+atlas = ExtResource("4_apx8n")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jbl1"]
+atlas = ExtResource("4_apx8n")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3anqc"]
+atlas = ExtResource("4_apx8n")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyuf6"]
+atlas = ExtResource("4_apx8n")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0fcr"]
+atlas = ExtResource("4_apx8n")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0o3aw"]
+atlas = ExtResource("4_apx8n")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_krid1"]
+atlas = ExtResource("4_apx8n")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tp568"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vpev")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbbnk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3jbl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3anqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyuf6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0fcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0o3aw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krid1")
+}],
+"loop": true,
+"name": &"shooting",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aaqdp"]
+size = Vector2(71.5, 78.5)
+
+[node name="PlayerShip" type="CharacterBody2D"]
+position = Vector2(4, 0)
+script = ExtResource("1_pv7xp")
+
+[node name="Ship" type="Sprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(6.63263, 6.63263)
+texture = ExtResource("1_5pkin")
+
+[node name="Booster" type="AnimatedSprite2D" parent="Ship"]
+position = Vector2(0, 4)
+sprite_frames = SubResource("SpriteFrames_pq400")
+frame_progress = 0.999349
+
+[node name="Engine" type="Sprite2D" parent="Ship"]
+z_index = -1
+position = Vector2(0, 3)
+texture = ExtResource("3_p5841")
+
+[node name="Weapon" type="AnimatedSprite2D" parent="Ship"]
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_tp568")
+animation = &"shooting"
+frame = 3
+frame_progress = 0.290573
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(11.25, 4.75)
+shape = SubResource("RectangleShape2D_aaqdp")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-132, 0)
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.6
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="HitBox"]
+polygon = PackedVector2Array(36, -98, 72, -97, 80, -65, 91, -20, 93, 18, 85, 61, 72, 99, 35, 98, 10, 70, -29, 79, -32, 51, -48, 30, -90, 2, -41, -30, -33, -44, -32, -78, -9, -79, 3, -71)
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]

@@ -1,0 +1,142 @@
+[gd_scene load_steps=7 format=3 uid="uid://bybqrp554xi8x"]
+
+[ext_resource type="Script" path="res://Scripts/Options.gd" id="1_117ep"]
+[ext_resource type="Texture2D" uid="uid://b7glfyygbann7" path="res://Images/Space/Nebula Aqua-Pink.png" id="2_a5oqh"]
+[ext_resource type="Texture2D" uid="uid://b5ndnpb8hobym" path="res://Images/Space/Stars Small_2.png" id="3_so2u8"]
+[ext_resource type="FontFile" uid="uid://cokywuyj4ehib" path="res://Fonts/Montserrat-Medium.otf" id="4_735am"]
+[ext_resource type="Theme" uid="uid://dj2vxmvc7a34e" path="res://theme/ui.theme" id="5_vjr0w"]
+[ext_resource type="AudioStream" uid="uid://dib0mw2sisqy7" path="res://Sounds/Checking Manifest.wav" id="6_3jq6s"]
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_117ep")
+
+[node name="Space" type="Sprite2D" parent="."]
+position = Vector2(583.073, 569.073)
+scale = Vector2(0.294398, 0.294398)
+texture = ExtResource("2_a5oqh")
+
+[node name="Stars" type="Sprite2D" parent="."]
+position = Vector2(568, 540)
+scale = Vector2(0.293579, 0.293579)
+texture = ExtResource("3_so2u8")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_right = 1153.0
+offset_bottom = 649.0
+
+[node name="Options" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -164.0
+offset_right = 207.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_735am")
+theme_override_font_sizes/font_size = 80
+text = "Options"
+
+[node name="MainMenu" type="Button" parent="."]
+layout_mode = 2
+offset_left = 456.0
+offset_top = 506.0
+offset_right = 686.0
+offset_bottom = 566.0
+theme = ExtResource("5_vjr0w")
+theme_override_fonts/font = ExtResource("4_735am")
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
+
+[node name="Volume" type="Label" parent="."]
+layout_mode = 0
+offset_left = 409.0
+offset_top = 275.0
+offset_right = 502.0
+offset_bottom = 320.0
+theme_override_font_sizes/font_size = 30
+text = "Volume:"
+
+[node name="Difficulty" type="Label" parent="."]
+layout_mode = 0
+offset_left = 409.0
+offset_top = 335.0
+offset_right = 615.0
+offset_bottom = 380.0
+theme_override_font_sizes/font_size = 30
+text = "Difficulty:
+"
+
+[node name="Selected" type="Label" parent="."]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 380.0
+offset_right = 668.0
+offset_bottom = 480.0
+theme_override_font_sizes/font_size = 15
+text = "Selected: Medium
+- 100 Health
+- Medium Damage
+- 100% Oxygen
+"
+
+[node name="VolumeSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 289.0
+offset_right = 767.0
+offset_bottom = 305.0
+theme = ExtResource("5_vjr0w")
+min_value = -30.0
+max_value = 0.0
+
+[node name="Easy" type="Button" parent="."]
+layout_mode = 0
+offset_left = 563.0
+offset_top = 343.0
+offset_right = 635.0
+offset_bottom = 374.0
+theme = ExtResource("5_vjr0w")
+text = "Easy"
+
+[node name="Medium" type="Button" parent="."]
+layout_mode = 0
+offset_left = 647.0
+offset_top = 342.0
+offset_right = 732.0
+offset_bottom = 373.0
+theme = ExtResource("5_vjr0w")
+text = "Medium
+"
+
+[node name="Hard" type="Button" parent="."]
+layout_mode = 0
+offset_left = 743.0
+offset_top = 342.0
+offset_right = 828.0
+offset_bottom = 373.0
+theme = ExtResource("5_vjr0w")
+text = "Hard
+"
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_3jq6s")
+autoplay = true
+
+[connection signal="pressed" from="MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="value_changed" from="VolumeSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="pressed" from="Easy" to="." method="_on_easy_pressed"]
+[connection signal="pressed" from="Medium" to="." method="_on_medium_pressed"]
+[connection signal="pressed" from="Hard" to="." method="_on_hard_pressed"]

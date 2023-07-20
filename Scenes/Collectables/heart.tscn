@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://dhq8vifaiapg1"]
+
+[ext_resource type="Script" path="res://Scripts/heart.gd" id="1_3ewhy"]
+[ext_resource type="Texture2D" uid="uid://be6sa3gvsrwql" path="res://Sprites/Healthbar/Heart.png" id="1_o867u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_anhrw"]
+bg_color = Color(0.109804, 0.909804, 0.0823529, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 20
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_26vn7"]
+radius = 7.0
+
+[sub_resource type="Animation" id="Animation_gf2cy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:theme_override_styles/panel:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.109804, 0.909804, 0.0823529, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yxhu5"]
+resource_name = "colorChange"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:theme_override_styles/panel:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.901961, 0, 0, 1), Color(1, 0.843137, 0, 1), Color(0.901961, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j582h"]
+_data = {
+"RESET": SubResource("Animation_gf2cy"),
+"colorChange": SubResource("Animation_yxhu5")
+}
+
+[node name="Heart" type="Area2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_3ewhy")
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0.470588)
+offset_left = -11.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 11.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_anhrw")
+
+[node name="HeartSprite" type="Sprite2D" parent="."]
+position = Vector2(0.5, 0)
+scale = Vector2(0.0311848, 0.0311848)
+texture = ExtResource("1_o867u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0.5, 0)
+shape = SubResource("CircleShape2D_26vn7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_j582h")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

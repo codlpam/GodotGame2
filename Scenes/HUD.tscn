@@ -1,0 +1,282 @@
+[gd_scene load_steps=15 format=3 uid="uid://bp0csydoa8pyy"]
+
+[ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_edxgy"]
+[ext_resource type="Theme" uid="uid://dj2vxmvc7a34e" path="res://theme/ui.theme" id="1_kkvxi"]
+[ext_resource type="Texture2D" uid="uid://b2msmwvetxl85" path="res://Sprites/Healthbar/health_bar.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://b4dp4k51gu4yl" path="res://Sprites/Healthbar/health_bar_decoration.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://be6sa3gvsrwql" path="res://Sprites/Healthbar/Heart.png" id="4_8etb1"]
+[ext_resource type="Texture2D" uid="uid://dmgtem38vg1x0" path="res://Images/oxygentank.png" id="4_blx8s"]
+[ext_resource type="Texture2D" uid="uid://demcnb04oqixc" path="res://Sprites/Coin/Coin_0000000.png" id="4_nh2pu"]
+[ext_resource type="FontFile" uid="uid://cp1lh7xl3y3km" path="res://Fonts/Oswald-Regular.ttf" id="5_rud28"]
+[ext_resource type="Texture2D" uid="uid://dt0oi4pswkbqf" path="res://Images/sword.png" id="6_rpsse"]
+[ext_resource type="PackedScene" uid="uid://c4qtmgt1crrf8" path="res://Scenes/pause_menu.tscn" id="8_fvy7v"]
+[ext_resource type="PackedScene" uid="uid://dad66c3t82vph" path="res://Scenes/popup.tscn" id="12_qwvwd"]
+
+[sub_resource type="Animation" id="Animation_n5nj8"]
+resource_name = "NotifyAnim"
+length = 1.5
+
+[sub_resource type="Animation" id="Animation_nevh3"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jf2hu"]
+_data = {
+"NotifyAnim": SubResource("Animation_n5nj8"),
+"RESET": SubResource("Animation_nevh3")
+}
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_edxgy")
+
+[node name="PauseMenu" parent="." instance=ExtResource("8_fvy7v")]
+
+[node name="OpenMenu" type="Label" parent="."]
+offset_left = 934.0
+offset_top = 450.0
+offset_right = 1141.0
+offset_bottom = 476.0
+text = "Press 'F' to Open Upgrades"
+
+[node name="CloseMenu" type="Label" parent="."]
+visible = false
+offset_left = 932.0
+offset_top = 251.0
+offset_right = 1139.0
+offset_bottom = 277.0
+text = "Press 'F' to Close Upgrades"
+
+[node name="Upgrades" type="Panel" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0.470588)
+offset_left = 942.0
+offset_top = 284.0
+offset_right = 1059.0
+offset_bottom = 404.0
+scale = Vector2(1.6, 1.6)
+theme = ExtResource("1_kkvxi")
+
+[node name="UpgradeHealth" type="Button" parent="Upgrades"]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 28.0
+offset_right = 113.0
+offset_bottom = 55.0
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("1_kkvxi")
+text = "+"
+
+[node name="Health2" type="Sprite2D" parent="Upgrades/UpgradeHealth"]
+position = Vector2(-21.25, 13.75)
+scale = Vector2(0.0574112, 0.0574112)
+texture = ExtResource("4_8etb1")
+
+[node name="UpgradeOxygen" type="Button" parent="Upgrades"]
+layout_mode = 0
+offset_left = 83.9645
+offset_top = 59.0
+offset_right = 112.964
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("1_kkvxi")
+text = "+"
+
+[node name="Oxygen2" type="Sprite2D" parent="Upgrades/UpgradeOxygen"]
+position = Vector2(-23.0547, 13.1895)
+scale = Vector2(0.0168508, 0.0168508)
+texture = ExtResource("4_blx8s")
+
+[node name="UpgradeDamage" type="Button" parent="Upgrades"]
+layout_mode = 0
+offset_left = 83.9645
+offset_top = 90.0
+offset_right = 112.964
+offset_bottom = 117.0
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("1_kkvxi")
+text = "+"
+
+[node name="Damage2" type="Sprite2D" parent="Upgrades/UpgradeDamage"]
+position = Vector2(-21.6914, 13.3086)
+scale = Vector2(0.0209204, 0.0209204)
+texture = ExtResource("6_rpsse")
+
+[node name="Label" type="Label" parent="Upgrades"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 5.0
+offset_right = 49.0
+offset_bottom = 31.0
+scale = Vector2(0.8, 0.8)
+text = "Cost"
+
+[node name="Upgrade" type="Label" parent="Upgrades"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 5.0
+offset_right = 121.0
+offset_bottom = 31.0
+scale = Vector2(0.8, 0.8)
+text = "Upgrade"
+
+[node name="HealthCoin" type="Sprite2D" parent="Upgrades"]
+position = Vector2(15.25, 37.25)
+scale = Vector2(0.0650001, 0.0650001)
+texture = ExtResource("4_nh2pu")
+
+[node name="HealthCost" type="Label" parent="Upgrades"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 22.0
+offset_right = 38.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 20
+text = "1"
+
+[node name="OxygenCoin" type="Sprite2D" parent="Upgrades"]
+position = Vector2(15.25, 69.25)
+scale = Vector2(0.0650001, 0.0650001)
+texture = ExtResource("4_nh2pu")
+
+[node name="OxygenCost" type="Label" parent="Upgrades"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 54.0
+offset_right = 38.0
+offset_bottom = 85.0
+theme_override_font_sizes/font_size = 20
+text = "1"
+
+[node name="DamageCoin" type="Sprite2D" parent="Upgrades"]
+position = Vector2(15.25, 101.25)
+scale = Vector2(0.0650001, 0.0650001)
+texture = ExtResource("4_nh2pu")
+
+[node name="DamageCost" type="Label" parent="Upgrades"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 86.0
+offset_right = 38.0
+offset_bottom = 117.0
+theme_override_font_sizes/font_size = 20
+text = "1"
+
+[node name="Score" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0.470588)
+offset_left = 349.0
+offset_top = 43.0
+offset_right = 467.0
+offset_bottom = 90.0
+theme = ExtResource("1_kkvxi")
+
+[node name="Score" type="Label" parent="Score"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 123.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 20
+text = "Score: 0"
+
+[node name="Coins" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0.470588)
+offset_left = 995.0
+offset_top = 487.0
+offset_right = 1111.0
+offset_bottom = 535.0
+theme = ExtResource("1_kkvxi")
+
+[node name="Coinsprite" type="Sprite2D" parent="Coins"]
+position = Vector2(28, 24)
+scale = Vector2(0.134167, 0.134167)
+texture = ExtResource("4_nh2pu")
+
+[node name="coins" type="Label" parent="Coins"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 2.0
+offset_right = 78.0
+offset_bottom = 47.0
+theme_override_font_sizes/font_size = 30
+text = "0"
+
+[node name="Health" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0.470588)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -101.5
+offset_top = 30.0
+offset_right = 101.5
+offset_bottom = 91.0
+grow_horizontal = 2
+theme = ExtResource("1_kkvxi")
+
+[node name="Heart" type="Sprite2D" parent="Health"]
+position = Vector2(101.235, 31.5)
+scale = Vector2(2.88235, 2.88235)
+texture = ExtResource("3")
+
+[node name="Healthbar" type="TextureProgressBar" parent="Health"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 11.0
+offset_right = 102.0
+offset_bottom = 28.0
+scale = Vector2(2.76338, 2.45772)
+texture_progress = ExtResource("2")
+
+[node name="Time" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0.470588)
+offset_left = 688.0
+offset_top = 43.0
+offset_right = 805.0
+offset_bottom = 91.0
+theme = ExtResource("1_kkvxi")
+
+[node name="Stopwatch" type="Label" parent="Time"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 11.0
+offset_right = 118.0
+offset_bottom = 42.0
+theme_override_font_sizes/font_size = 18
+text = "Time: 00:00"
+
+[node name="Oxygen" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0.470588)
+offset_left = 956.0
+offset_top = 543.0
+offset_right = 1115.0
+offset_bottom = 617.0
+theme = ExtResource("1_kkvxi")
+
+[node name="Sprite2D" type="Sprite2D" parent="Oxygen"]
+position = Vector2(37, 36)
+scale = Vector2(0.0371875, 0.031875)
+texture = ExtResource("4_blx8s")
+
+[node name="Oxygen" type="Label" parent="Oxygen"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 15.0
+offset_right = 153.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("5_rud28")
+theme_override_font_sizes/font_size = 30
+text = "100%"
+
+[node name="NotifyAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jf2hu")
+}
+
+[node name="OxygenTickDown" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Popup" parent="." instance=ExtResource("12_qwvwd")]
+
+[connection signal="pressed" from="Upgrades/UpgradeHealth" to="." method="_on_upgrade_health_pressed"]
+[connection signal="pressed" from="Upgrades/UpgradeOxygen" to="." method="_on_upgrade_oxygen_pressed"]
+[connection signal="pressed" from="Upgrades/UpgradeDamage" to="." method="_on_upgrade_damage_pressed"]
+[connection signal="timeout" from="OxygenTickDown" to="." method="_on_oxygen_tick_down_timeout"]
